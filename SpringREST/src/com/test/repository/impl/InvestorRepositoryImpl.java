@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import com.test.repository.InvestorRepository;
 import com.test.vo.Investor;
+
 @Repository
 public class InvestorRepositoryImpl implements InvestorRepository {
 	@PersistenceContext
@@ -15,14 +16,18 @@ public class InvestorRepositoryImpl implements InvestorRepository {
 	@Override
 	public Investor save(Investor investor) {
 		entityManager.persist(investor);
-	    return investor;
+		return investor;
 	}
+
 	@Override
 	public List<Investor> findByName(String name) {
 		@SuppressWarnings("unchecked")
-		List<Investor> investors = this.entityManager.createNativeQuery("select t FROM INVESTORS t", Investor.class).getResultList();
+		List<Investor> investors = this.entityManager.createQuery(
+				"select t from Investor t.name= '" + name + "'")
+				.getResultList();
 		return investors;
 	}
+
 	@Override
 	public List<Investor> findByEmail(String email) {
 		@SuppressWarnings("unchecked")

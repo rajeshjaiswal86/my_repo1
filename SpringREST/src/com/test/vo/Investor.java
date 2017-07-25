@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  */
 @Entity
-@Table(name = "INVESTORS")
+@Table(name = "INVESTOR")
 @JsonIgnoreProperties
 public class Investor {
 	private long id;
